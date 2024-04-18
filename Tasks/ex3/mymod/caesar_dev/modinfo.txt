@@ -1,0 +1,10 @@
+filename:       /home/dan/mymod/caesar_dev/caesar_dev.ko
+version:        dev
+description:    "caesar cipher" minimal module
+author:         KRU0142 <daniel.krupa.st@vsb.cz>
+license:        GPL
+srcversion:     5ADB2FED14AEABEB337B319
+depends:        
+retpoline:      Y
+name:           caesar_dev
+vermagic:       5.10.16KRU0142 mod_unload 

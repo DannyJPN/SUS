@@ -1,0 +1,1 @@
+sudo apt install bind9 dnsutils udns-utils

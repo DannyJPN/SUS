@@ -1,0 +1,17 @@
+$TTL    86400
+56.168.192.in-addr.arpa.       IN      SOA     ns1.kru0142.org major.kru0142.org. (
+                           20120820 ; serial
+                           4h       ; slave refresh
+                           2h       ; slave retry interval
+                           2w       ; slave data expiration
+                           1h )     ; maximum caching time when lookups fail
+;
+56.168.192.in-addr.arpa.       IN      NS      dnsA.kru0142.org.
+56.168.192.in-addr.arpa.       IN      NS      dnsB.kru0142.org. 
+
+10.56.168.192.in-addr.arpa.    IN      PTR     webserver.kru0142.org.
+1.56.168.192.in-addr.arpa.     IN      PTR     router.kru0142.org.
+101.56.168.192.in-addr.arpa.    IN      PTR     dnsA.kru0142.org.
+104.56.168.192.in-addr.arpa.    IN      PTR     dnsB.kru0142.org.
+
+

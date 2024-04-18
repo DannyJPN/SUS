@@ -1,0 +1,48 @@
+root@debianSUS:/srv/tftp# cat /etc/dhcp/dhcpd.conf | grep -v '#' | sed '/^$/d' 
+option domain-name "vsb.cz";
+option domain-name-servers 8.8.8.8;
+default-lease-time 600;
+max-lease-time 7200;
+ddns-update-style none;
+subnet 192.168.74.0 netmask 255.255.255.0 {
+  range 192.168.74.3 192.168.74.100;
+  option routers 192.168.74.2;
+  option broadcast-address 192.168.74.255;
+  next-server 192.168.74.2;
+  filename "pxelinux.0";
+}
+root@debianSUS:/srv/tftp# cat /etc/default/isc-dhcp-server | grep -v '#' | sed '/^$/d' 
+INTERFACESv4="enp0s8"
+INTERFACESv6=""
+root@debianSUS:/srv/tftp# cat /etc/default/tftpd-hpa | grep -v '#' | sed '/^$/d' 
+TFTP_USERNAME="tftp"
+TFTP_DIRECTORY="/srv/tftp"
+TFTP_ADDRESS="0.0.0.0:69"
+TFTP_OPTIONS="--secure"
+root@debianSUS:/srv/tftp# cat /etc/exports | grep -v '#' | sed '/^$/d'
+/remote/root     192.168.74.0/24(rw,async,no_root_squash) 
+root@debianSUS:/srv/tftp# 
+root@debianSUS:/srv/tftp# cat pxelinux.cfg/default
+# D-I config version 2.0
+# search path for the c32 support libraries (libcom32, libutil etc.)
+DEFAULT vesamenu.c32
+PROMPT 0
+
+MENU TITLE  Boot Menu
+
+LABEL Debian - NetBoot
+KERNEL /Debian/vmlinuz-4.19.0-14-amd64
+APPEND initrd=/Debian/initrd.img-4.19.0-14-amd64  root=/dev/nfs nfsroot=192.168.74.2:/remote/root ip=dhcp rw
+root@debianSUS:/srv/tftp#
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+masters kru0142.org-master { 192.168.56.101; };
+
+zone kru0142.org {
+	type slave;
+	file "/var/cache/bind/db.kru0142.org";
+	masters { kru0142.org-master; };
+};
+
+zone 56.168.192.in-addr.arpa {
+        type slave;
+        file "/var/cache/bind/db.192.168.56";
+        masters { kru0142.org-master; };
+};
+

@@ -1,0 +1,1 @@
+KERNEL=="caesar", SYMLINK+="caesar_cipher", MODE="0444"

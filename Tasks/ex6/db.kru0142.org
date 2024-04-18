@@ -1,0 +1,34 @@
+$TTL 3h 			   ;doba expirace všech záznamů
+@       IN      SOA     dnsA.kru0142.org. major.kru0142.org. (  ; autoritativní DNS server + email správce bez @
+                         2021031300 ; seriové číslo, často ve formě data
+                         4h         ; jak často si stahuje data sekundární server
+                         2h         ; za jak dlouho se má sek.server pokusit stáhnout data při neúspěchu
+                         2w         ; kdy platnost dat v sek.serveru vyprší
+                         1h )       ; jak dlouho si mají data pamatovat cache servery
+;
+@       IN      NS      dnsA.kru0142.org. ; autoritativní servery pro doménu, musí mít i A záznamy
+@       IN      NS      dnsB.kru0142.org. ; autoritativní servery pro doménu, musí mít i A záznamy
+
+
+kru0142.org.    IN      MX      10      smtp.kru0142.org.  ; primární emailový server
+kru0142.org.    IN      MX      20      smtp2.kru0142.org. ; sekundární emailový server
+kru0142.org.    IN      A       192.168.56.106          ; primární záznamy
+dnsA            IN      A       192.168.56.106
+dnsB            IN      A       192.168.56.104
+smtp           IN      A       192.168.56.106
+smtp2          IN      A       192.168.56.104
+www            IN      CNAME   kru0142.org.
+wiki	        IN      CNAME   kru0142.org.
+test	        IN      CNAME   kru0142.org.
+subdomena1     IN      A       192.168.56.106
+subdomena2     IN      CNAME   kru0142.org.
+www1	        IN      A       192.168.56.106
+www2           IN      A       192.168.56.106
+
+_http._tcp     IN      SRV     1 2 80  www1 ; _http sluzba, _tcp protokol, 1 priorita, 2 váha
+               IN      SRV     5 3 80  www2
+
+_http._tcp.www IN      SRV     1 2 80  www1.kru0142.org. ; _http sluzba, _tcp protokol, 1 priorita, 2 váha
+               IN      SRV     5 3 80  www2.kru0142.org.
+
+*._tcp         IN      SRV     0 0 0   .  ;ostatní služby nejsou podporovány

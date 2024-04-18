@@ -1,0 +1,28 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+acl "kru0142.org" {
+	192.168.56.104;
+};
+
+
+zone "kru0142.org" {
+       type master;    //jedná se o primární server pro danou doménu
+       file "/etc/bind/db.kru0142.org";
+	allow-transfer {"kru0142.org";};
+};
+
+acl "56.168.192.in-addr.arpa"{
+	192.168.56.104;
+};
+
+zone "56.168.192.in-addr.arpa" {
+       type master;
+       file "/etc/bind/db.192.168.56";
+	allow-transfer {"56.168.192.in-addr.arpa";};
+};
